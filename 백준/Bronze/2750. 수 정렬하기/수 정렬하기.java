@@ -13,18 +13,29 @@ public class Main {
         }
 
         // 삽입 정렬
-        for (int i = 1; i < count; i++) {
-            int key = arr[i]; // 2
-            int index = i - 1; //
+//        for (int i = 1; i < count; i++) {
+//            int key = arr[i]; // 2
+//            int index = i - 1; //
+//
+//            while (index >= 0 && key < arr[index]) {
+//                arr[index+1] = arr[index];
+//                index--;
+//            }
+//
+//            arr[index+1] = key;
+//        }
 
-            while (index >= 0 && key < arr[index]) {
-                arr[index+1] = arr[index];
-                index--;
+        // 버블 정렬
+        for (int i = count-1; i > 0; i--) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int key = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = key;
+                }
             }
-
-            arr[index+1] = key;
         }
-        
+
         for (int num : arr) {
             System.out.println(num);
         }
