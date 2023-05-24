@@ -8,14 +8,14 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine(), " ");
 
-        Map<String, Integer> map = new HashMap<>();
-        List<String> list = new ArrayList<>();
         int n = Integer.parseInt(st.nextToken());
+        Map<String, Integer> map = new HashMap<>();
+        String[] arr = new String[n + 1];
         int index = 1;
         for (int i = 0; i < n; i++) {
             String name = br.readLine();
             map.put(name, index++);
-            list.add(name);
+            arr[i+1] = name;
         }
 
         n = Integer.parseInt(st.nextToken());
@@ -23,7 +23,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String line = br.readLine();
             try {
-                builder.append(list.get(Integer.parseInt(line)-1));
+                builder.append(arr[Integer.parseInt(line)]);
             } catch (NumberFormatException e) {
                 builder.append(map.get(line));
             } finally {
