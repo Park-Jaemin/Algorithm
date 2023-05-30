@@ -17,7 +17,7 @@ class Solution {
         if (curBit.charAt(length) == '0') {
             return number + 1;
         }
-
+//10111 11000 11011
         while (curBit.charAt(length) == '1') {
             curBit.replace(length, length+1, "0");
             length--;
