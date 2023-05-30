@@ -3,7 +3,7 @@ import java.util.*;
 class Solution {
     public int solution(int x, int y, int n) {
         boolean[] visit = new boolean[y+1];
-        Queue<int[]> queue = new LinkedList<>();
+        Queue<int[]> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o[1]));
         queue.offer(new int[]{x, 0});
         visit[x] = true;
 
