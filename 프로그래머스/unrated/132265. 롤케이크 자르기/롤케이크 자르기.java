@@ -15,11 +15,11 @@ class Solution {
         int ans = 0;
         int l = 0;
         for (int x : topping) {
-            if (right[x] == 1) {
+            if (right[x] == 1) { // right[1] = 1 -> 0
                 r--;
             }
 
-            if (left[x] == 0) {
+            if (left[x] == 0) { // left[1] = 0 -> 1
                 l++;
             }
             right[x]--;
