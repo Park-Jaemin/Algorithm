@@ -4,9 +4,8 @@ class Solution {
     public int solution(String numbers) {
         TreeSet<Integer> set = new TreeSet<>();
 
-        for (int i = 0; i < numbers.length(); i++) {
             getNum(set, numbers.split(""), new boolean[numbers.length()], "");
-        }
+
 
         boolean[] prime = new boolean[set.last()+1];
         getPrime(prime);
