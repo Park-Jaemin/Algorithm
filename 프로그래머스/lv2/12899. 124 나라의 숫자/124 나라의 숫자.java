@@ -9,7 +9,7 @@ class Solution {
             if (val == 0) {
                 num = num/3 - 1;
             } else {
-                num = num / 3;
+                num = num/3;
             }
         }
 
