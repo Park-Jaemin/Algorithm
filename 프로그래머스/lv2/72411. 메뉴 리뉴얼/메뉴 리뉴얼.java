@@ -1,9 +1,9 @@
 import java.util.*;
 
 class Solution {
-    
+
     HashMap<String, Integer> map = new HashMap<>();
-    
+
     public String[] solution(String[] orders, int[] course) {
         for (int i = 0; i < orders.length; i++) {
             char[] arr = orders[i].toCharArray();
@@ -30,11 +30,11 @@ class Solution {
                 map.clear();
             }
         }
-        
+
         answer.sort(String::compareTo);
         return answer.toArray(new String[0]);
     }
-    
+
     void combination(String menu, String order, int c) {
         if (c == 0) {
             map.put(menu, map.getOrDefault(menu, 0)+1);
