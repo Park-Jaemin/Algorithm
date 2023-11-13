@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-        int total = 0;
-        int now = 0;
+        long total = 0;
+        long now = 0;
         int n = Integer.parseInt(br.readLine()) - 1;
 
         int[] km = new int[n];
@@ -28,7 +28,7 @@ public class Main {
             }
 
             int currentPay = pay[i];
-            int move = 0;
+            long move = -now;
             int j = i;
             while (j < n && currentPay <= pay[j]) {
                 move += km[j];
@@ -36,7 +36,7 @@ public class Main {
             }
 
             total += move * currentPay;
-            now += move;
+            now += move - km[i];
         }
 
         System.out.println(total);
