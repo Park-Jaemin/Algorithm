@@ -15,17 +15,18 @@ class Solution {
     int[] E = new int[2];
     
     public int solution(String[] maps) {
-        int[][] map = new int[maps.length][maps[0].length()];
-        int[][] map2 = new int[maps.length][maps[0].length()];
+        int[][] map = new int[maps.length][maps[0].length()]; // L까지 도달하는 미로
+        int[][] map2 = new int[maps.length][maps[0].length()]; // L이후 E까지 도달하는 미로
         
         // 초기화 시켜주기
         define(maps, map, map2);
         
-        // L까지 도달하는 최단 거리 찾기
+        // S부터 L까지 최단 거리
         int target = bfs(map, S, L);
         if (target == -1) return target;
-        map2[L[0]][L[1]] = target;
         
+        // L이후 E까지 최단 거리
+        map2[L[0]][L[1]] = target;
         return bfs(map2, L, E);
     }
     
