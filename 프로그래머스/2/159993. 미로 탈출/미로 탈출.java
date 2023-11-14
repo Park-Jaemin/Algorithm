@@ -25,7 +25,6 @@ class Solution {
         int target = bfs(map, S, L);
         if (target == -1) return target;
         map2[L[0]][L[1]] = target;
-        System.out.println(Arrays.deepToString(map2));
         
         return bfs(map2, L, E);
     }
