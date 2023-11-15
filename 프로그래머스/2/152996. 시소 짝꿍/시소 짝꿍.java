@@ -22,7 +22,7 @@ class Solution {
 
             pre = 0;
             for (int j = i+1; j < weights.length; j++) {
-                if (weights[i]*4 < weights[j]) break;
+                if (weights[i]*2 < weights[j]) break;
 
                 if (weights[i] == weights[j]
                     || weights[i]*3 == weights[j]*2
