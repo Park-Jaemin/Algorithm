@@ -9,11 +9,9 @@ public class Main {
     static int plus;
     static int zero;
     static int minus;
-    static StringBuilder sb;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        sb = new StringBuilder();
 
         int n = Integer.parseInt(br.readLine());
         board = new int[n][n];
@@ -40,7 +38,6 @@ public class Main {
         }
 
         size = size / 3;
-        sb.append("(");
         findCount(x, y, size);
         findCount(x, y + size, size);
         findCount(x, y + size + size, size);
@@ -50,7 +47,6 @@ public class Main {
         findCount(x + size + size, y, size);
         findCount(x + size + size, y + size, size);
         findCount(x + size + size, y + size + size, size);
-        sb.append(")");
     }
 
     static boolean checkAllSame(int x, int y, int size) {
