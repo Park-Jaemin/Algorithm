@@ -3,9 +3,8 @@ import java.util.*;
 class Solution {
     public String solution(String s) {
         StringBuilder sb = new StringBuilder();
-        String[] split = s.toLowerCase().split("");
+        String[] split = s.toLowerCase().split(""); 
         boolean first = true;
-        
         
         for (int i = 0; i < split.length; i++) {
             String word = split[i];
