@@ -6,7 +6,7 @@ class Solution {
 //     int fibonacci(int n) {
 //         if (n == 0) return 0;
 //         if (n == 1) return 1;
-//         return fibonacci(n-2) + fibonacci(n-1);
+//         return (fibonacci(n-2) + fibonacci(n-1)) % 1234567;
 //     }
     
     public long solution(int n) {
@@ -15,8 +15,8 @@ class Solution {
         arr[1] = 1;
         
         for (int i = 2; i < n+1; i++) {
-            arr[i] = arr[i-2] % 1234567 + arr[i-1] % 1234567;
+            arr[i] = (arr[i-2] + arr[i-1]) % 1234567;
         }
-        return arr[n] % 1234567;
+        return arr[n];
     }
 }
