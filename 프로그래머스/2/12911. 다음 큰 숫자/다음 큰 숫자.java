@@ -1,14 +1,9 @@
 class Solution {
     public int solution(int n) {
-        int count = getCount(n);
+        int count = Integer.bitCount(n);
         while (true) {
-            if (count == getCount(++n)) break;
+            if (count == Integer.bitCount(++n)) break;
         }
         return n;
-    }
-    
-    int getCount(int n) {
-        String binary = Integer.toBinaryString(n);
-        return binary.length() - binary.replace("1", "").length();
     }
 }
