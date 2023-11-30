@@ -1,29 +1,28 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class Solution {
     public int[] solution(int n, String[] words) {
-        int[] answer = new int[2];
-
-        // 1. List 에 쌓기
-        // 3. 이전 글자로 시작하는지 체크하고 기존 List 에 있는지 체크
-
-        List<String> wordList = new ArrayList<>();
+        Set<String> useWords = new HashSet<String>();
+        
+        char before = words[0].charAt(0);
         for (int i = 0; i < words.length; i++) {
-            answer[0] = (i + 1) % n != 0 ? (i + 1) % n : n;
-            answer[1] = (i + 1) % n != 0 ? ((i + 1) / n) + 1 : (i + 1) / n;
-
-            if (i != 0 && words[i - 1].charAt(words[i - 1].length()-1) != words[i].charAt(0)) {
-                return answer;
+            String word = words[i];
+            int size = useWords.size();
+            useWords.add(word);
+            
+            int people = (i+1) % n == 0 ? n : (i+1) % n;
+            int order = i / n + 1;
+            
+            if (before != word.charAt(0)) {
+                return new int[]{people, order};
             }
-
-
-            if (wordList.contains(words[i])) {
-                return answer;
+            if (size == useWords.size()) {
+                return new int[]{people, order};
             }
-
-            wordList.add(words[i]);
+            
+            before = word.charAt(word.length()-1);
         }
+        
         return new int[]{0,0};
     }
 }
