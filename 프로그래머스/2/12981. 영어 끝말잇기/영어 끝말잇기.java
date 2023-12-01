@@ -10,7 +10,7 @@ class Solution {
             int size = useWords.size();
             useWords.add(word);
             
-            int people = (i+1) % n == 0 ? n : (i+1) % n;
+            int people = i % n +1;
             int order = i / n + 1;
             
             if (before != word.charAt(0)) {
