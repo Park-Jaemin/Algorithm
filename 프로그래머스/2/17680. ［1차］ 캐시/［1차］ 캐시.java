@@ -8,7 +8,7 @@ class Solution {
         
         for (String city : cities) {
             city = city.toLowerCase();
-            if (list.contains(city)) { // hit
+            if (list.contains(city)) {
                 answer++;
                 list.remove(city);
                 list.offerFirst(city);
@@ -22,6 +22,3 @@ class Solution {
         return answer;
     }
 }
-
-// cache miss = 5;
-// cache hit = 1;
