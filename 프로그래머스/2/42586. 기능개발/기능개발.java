@@ -4,10 +4,8 @@ class Solution {
     public int[] solution(int[] progresses, int[] speeds) {        
         Queue<Integer> queue = new LinkedList<>();
         for (int i = 0; i < progresses.length; i++) {
-            queue.offer((int) Math.ceil((100 - progresses[i]) / (double) speeds[i]));
+            queue.offer((int) Math.ceil((100.0 - progresses[i]) / speeds[i]));
         }
-        
-        System.out.println(queue);
         
         List<Integer> list = new ArrayList<>();
         while (!queue.isEmpty()) {
