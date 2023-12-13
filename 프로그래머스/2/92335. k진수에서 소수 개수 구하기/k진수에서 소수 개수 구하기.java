@@ -1,16 +1,7 @@
 class Solution {
     public int solution(int n, int k) {
-        String kNumber = makeKNumber(n, k);          
+        String kNumber = Integer.toString(n, k);          
         return findPrimeCount(kNumber.split("0"));
-    }
-    
-    String makeKNumber(int n, int k) {
-        StringBuilder sb = new StringBuilder();
-        while (n > 0) {
-            sb.append(n%k);
-            n /= k;
-        }
-        return sb.reverse().toString();
     }
     
     int findPrimeCount(String[] arr) {
