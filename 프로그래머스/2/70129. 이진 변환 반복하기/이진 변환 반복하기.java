@@ -1,15 +1,12 @@
 import java.util.*;
 
 class Solution {
-    int[] answer;
     public int[] solution(String s) {
-        answer = new int[2];
-        toBinary(s);
-        return answer;
+        return toBinary(s, new int[2]);
     }
     
-    void toBinary(String s) {
-        if (s.equals("1")) return;
+    int[] toBinary(String s, int[] answer) {
+        if (s.equals("1")) return answer;
         
         StringBuilder s2 = new StringBuilder();
         StringTokenizer st = new StringTokenizer(s, "0");
@@ -20,6 +17,6 @@ class Solution {
         answer[0]++;
         answer[1] += s.length() - s2.length();
         
-        toBinary(Integer.toBinaryString(s2.length()));
+        return toBinary(Integer.toBinaryString(s2.length()), answer);
     }
 }
