@@ -1,61 +1,58 @@
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 class Solution {
     public int[] solution(int[] fees, String[] records) {
-        int basicTime = fees[0];
-        int basicFee = fees[1];
-        int unitTime = fees[2];
-        int unitFee = fees[3];
-        int max = 23*60 + 59;
-
-        Set<String> numbers = new HashSet<>();
-        Queue<Car> queue = new PriorityQueue<>((o1, o2) -> {
-            if (o1.number.equals(o2.number)) return o1.time - o2.time;
-            return o1.number.compareTo(o2.number);
+        Arrays.sort(records, (o1, o2) -> {
+            String number1 = o1.substring(6, 10);
+            String number2 = o2.substring(6, 10);
+            if (number1.equals(number2)) {
+                return o1.substring(0, 5).compareTo(o2.substring(0, 5));
+            }
+            return number1.compareTo(number2);
         });
-        for (String info : records) {
-            numbers.add(info.substring(6, 10));
-            queue.offer(new Car(info.substring(6, 10), info.substring(0, 5)));
-        }
-        int[] answer = new int[numbers.size()];
-        int i = 0;
 
-        while (!queue.isEmpty()) {
-            Car car = queue.poll();
-            int outTime = max;
-
-            if (!queue.isEmpty() && queue.peek().number.equals(car.number)) {
-                outTime = queue.poll().time;
+        Stack<String> stack = new Stack<>();
+        Map<String, Long> map = new TreeMap<>();
+        for (String record : records) {
+            if (stack.isEmpty()) {
+                stack.push(record);
+                continue;
             }
 
-            int time = outTime - car.time;
-            answer[i] += time;
-
-            if (!queue.isEmpty() && !queue.peek().number.equals(car.number)) {
-                i++;
-            }
-        }
-
-        for (int y = 0; y < answer.length; y++) {
-            int time = answer[y];
-            if (time <= basicTime) {
-                answer[y] = basicFee;
+            String car = stack.pop();
+            if (car.substring(6, 10).equals(record.substring(6, 10))) {
+                put(car.substring(6, 10), car.substring(0, 5), record.substring(0, 5), map);
             } else {
-                int i1 = (int) Math.ceil((double) (time - basicTime) / unitTime);
-                answer[y] = i1 * unitFee + basicFee;
+                put(car.substring(6, 10), car.substring(0, 5), "23:59", map);
+                stack.push(record);
             }
+        }
+
+        if (!stack.isEmpty()) {
+            String car = stack.pop();
+            put(car.substring(6, 10), car.substring(0, 5), "23:59", map);
+        }
+
+        int[] answer = new int[map.size()];
+        int i = 0;
+        for (long time : map.values()) {
+            int fee = fees[1];
+            if (time > fees[0]) {
+                fee += (int) (Math.ceil((double) (time - fees[0]) / fees[2]) * fees[3]);
+            }
+            answer[i++] = fee;
         }
 
         return answer;
     }
-}
-class Car {
-    String number;
-    int time;
-
-    Car(String number, String time) {
-        String[] split = time.split(":");
-        this.number = number;
-        this.time = Integer.parseInt(split[0])*60 + Integer.parseInt(split[1]);
+    
+    void put(String number, String inTime, String outTime, Map<String, Long> map) {
+        map.put(number, map.getOrDefault(number, 0L) + calcTime(inTime, outTime));
+    }
+    
+    long calcTime(String inTime, String outTime) {
+        return ChronoUnit.MINUTES.between(LocalTime.parse(inTime), LocalTime.parse(outTime));
     }
 }
