@@ -2,61 +2,63 @@ import java.util.*;
 
 class Solution {
     public int solution(int m, int n, String[] board) {
+        char[][] map = divideMap(m, n, board);  
+        return play(m, n, map);
+    }
+    
+    char[][] divideMap(int m, int n, String[] board) {
         char[][] map = new char[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 map[i][j] = board[i].charAt(j);
             }
         }
-
-        Set<String> set;
-        int count = 0;
-        while (true) {
-            set = new HashSet<>();
-            find(m, n, map, set);
-            if (set.size() == 0) break;
-            count += set.size();
-            remove(map, set);
-            change(m, n, map);
-        }
-        return count;
+        return map;
     }
     
-    private void find(int m, int n, char[][] map, Set<String> set) {
+    int play(int m, int n, char[][] map) {
+        Set<String> set = find(m, n, map);
+        if (set.size() == 0) return 0;
+        remove(m, n, map, set);
+        return set.size() + play(m, n, map);
+    }
+    
+    Set<String> find(int m, int n, char[][] map) {
+        Set<String> set = new HashSet<>();
         for (int i = 0; i < m -1; i++) {
             for (int j = 0; j < n -1; j++) {
                 char block = map[i][j];
                 if (block == '-') continue;
-
-                boolean collect = true;
+                
                 String[] collectMap = new String[4];
-                int idx = 0;
-                for (int x = i; collect && x <= i+1; x++) {
-                    for (int y = j; y <= j+1; y++) {
-                        if (block != map[x][y]) {
-                            collect = false;
-                            break;
-                        }
-                        collectMap[idx] = x + " " + y;
-                        idx++;
-                    }
-                }
-
-                if (collect) {
+                if (isCollect4Block(i, j, block, map, collectMap)) {
                     set.addAll(Arrays.asList(collectMap));
                 }
             }
         }
+        return set;
     }
     
-    private void remove(char[][] map, Set<String> set) {
+    boolean isCollect4Block(int i, int j, char block, char[][] map, String[] collectMap) {
+        int idx = 0;
+        for (int x = i; x <= i+1; x++) {
+            for (int y = j; y <= j+1; y++) {
+                if (block != map[x][y]) return false;
+                collectMap[idx++] = x+" "+y;
+            }
+        }
+        return true;
+    }
+    
+    void remove(int m, int n, char[][] map, Set<String> set) {
         for (String coordinate : set) {
             String[] s = coordinate.split(" ");
             map[Integer.parseInt(s[0])][Integer.parseInt(s[1])] = '-';
         }
+        change(m, n, map);
     }
     
-    private void change(int m, int n, char[][] map) {
+    void change(int m, int n, char[][] map) {
         for (int i = m - 1; i >= 0; i--) {
             for (int j = n - 1; j >= 0; j--) {
                 if (map[i][j] != '-') continue;
