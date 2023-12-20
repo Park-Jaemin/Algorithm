@@ -12,7 +12,11 @@ class Solution {
         }
         
         for (int i = 0; i < arr.length; i++) {
-            answer += checkBracket(deque.iterator()) ? 1 : 0;
+            if (checkBracket(deque.iterator())) {
+                answer++;
+                i++;
+                deque.offerLast(deque.pollFirst());
+            }
             deque.offerLast(deque.pollFirst());
         }
         
