@@ -12,7 +12,7 @@ class Solution {
             deque.offerLast(new int[]{priorities[i], i});
         }
         
-        while (true) {
+        while (!deque.isEmpty()) {
             int[] poll = deque.poll();
             int priority = poll[0];
             int index = poll[1];
