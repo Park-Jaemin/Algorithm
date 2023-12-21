@@ -15,7 +15,7 @@ class Solution {
             } else {
                 answer += 5;
                 list.offerFirst(city);
-                if (list.size() > cacheSize) list.pollLast();
+                if (list.size() > cacheSize) list.pollLast(); 
             }
         }
         
