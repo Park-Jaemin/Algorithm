@@ -25,8 +25,8 @@ class Solution {
     void bfs(int row, int col, boolean[][] visit, int[] pipes, int[][] land) {
         int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; 
         Queue<int[]> queue = new LinkedList<>();
-        Set<Integer> cols = new HashSet<>();
         queue.offer(new int[]{row, col});
+        int maxCol = col;
         int count = 0;
         
         while (!queue.isEmpty()) {
@@ -34,7 +34,7 @@ class Solution {
             int[] poll = queue.poll();
             int x = poll[1];
             int y = poll[0];
-            cols.add(x);
+            maxCol = Math.max(maxCol, x);
             
             for (int[] dir : dirs) {
                 int nx = x + dir[0];
@@ -48,15 +48,15 @@ class Solution {
             }
         }
         
-        addPipes(cols, pipes, count);
+        addPipes(maxCol, col, pipes, count);
     }
     
     boolean inRange(int x, int y, int[][] land) {
         return x >= 0 && y >= 0 && x < land[0].length && y < land.length;
     }
     
-    void addPipes(Set<Integer> cols, int[] pipes, int count) {
-        for (int col : cols) {
+    void addPipes(int maxCol, int minCol, int[] pipes, int count) {
+        for (int col = minCol; col <= maxCol; col++) {
             pipes[col] += count;
         }
     }
