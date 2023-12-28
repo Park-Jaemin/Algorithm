@@ -10,7 +10,7 @@ class Solution {
         char[][] map = new char[m][n];
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
-                map[i][j] = board[i].charAt(j);
+                map[i][j] = board[i].charAt(j); 
             }
         }
         return map;
