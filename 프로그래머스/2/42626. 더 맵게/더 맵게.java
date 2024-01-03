@@ -2,8 +2,6 @@ import java.util.*;
 
 class Solution {
     public int solution(int[] scoville, int K) {
-        int answer = 0;
-        
         Queue<Integer> queue = new PriorityQueue<>();
         for (int sco : scoville) {
             queue.offer(sco);
