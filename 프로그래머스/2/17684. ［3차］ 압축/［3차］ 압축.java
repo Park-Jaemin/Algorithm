@@ -18,7 +18,7 @@ class Solution {
             }
             
             String key = i == msg.length() ?
-                    word.toString() : word.substring(0, word.length() - 1);
+                    word : word.substring(0, word.length() - 1);
 
             answer.add(dictionary.get(key));
         }
