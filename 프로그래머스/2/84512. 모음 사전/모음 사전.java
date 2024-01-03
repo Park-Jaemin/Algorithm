@@ -7,6 +7,7 @@ class Solution {
         dfs(word, new StringBuilder());
         return count;
     }
+    // A - AA - AAA - AAAE
     
     void dfs(String word, StringBuilder now) {      
         if (now.toString().equals(word) || now.length() == words.length) {
@@ -14,8 +15,8 @@ class Solution {
         }
         
         for (int i = 0; i < words.length; i++) {
-            count++;
-            now.append(words[i]);
+            count++; // 1
+            now.append(words[i]); // AAAAE
             dfs(word, now);
             
             if (now.toString().equals(word)) {
