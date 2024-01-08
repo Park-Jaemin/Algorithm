@@ -12,6 +12,8 @@ class Solution {
             }
             return number1.compareTo(number2);
         });
+        
+        System.out.println(Arrays.toString(records));
 
         Stack<String> stack = new Stack<>();
         Map<String, Long> map = new TreeMap<>();
