@@ -1,28 +1,30 @@
 class Solution {
     public int solution(int storey) {
-        int answer = 0;
-
-        String num = Integer.toString(storey);
-        int[] arr = new int[num.length()];
-
-        for (int i = 0; i < num.length(); i++) {
-            arr[i] = num.charAt(i) - '0';
+        return find(storey, 0);
+    }
+    
+    int find(int storey, int answer) {
+        if (storey == 0) {
+            return answer;
         }
-
-        for (int i = arr.length-1; i >= 0; i--) {
-            int now = arr[i];
-
-            if (now > 5) {
-                now = 10 - now;
-
-                if (i == 0) answer++;
-                else arr[i-1]++;
-            } else if (now == 5 && i > 0 && arr[i-1] >= 5) {
-                arr[i-1]++;
+        
+        int digit = storey % 10;
+        storey /= 10;
+        
+        if (digit > 5) {
+            answer += (10 - digit);
+            storey++;
+        } else if (digit < 5) {
+            answer += digit;
+        } else {
+            if (storey % 10 >= 5) {
+                answer += (10 - digit);
+                storey++;
+            } else {
+                answer += digit;
             }
-            answer += now;
         }
-
-        return answer;
+        
+        return find(storey, answer);
     }
 }
