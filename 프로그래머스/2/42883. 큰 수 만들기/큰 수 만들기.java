@@ -8,7 +8,7 @@ class Solution {
             for (int j = idx; j <= i + k; j++) {
                 if (number.charAt(j) > max) {
                     max = number.charAt(j);
-                    idx = j + 1;
+                    idx = j + 1 ;
                 }
             }
             sb.append(max);
