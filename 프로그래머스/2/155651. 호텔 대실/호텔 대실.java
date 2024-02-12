@@ -9,12 +9,13 @@ class Solution {
             return o1[0].compareTo(o2[0]);
         });
         
-        Queue<Stack<Integer>> roomList = new PriorityQueue<>((o1, o2) -> Integer.compare(o1.peek(), o2.peek()));
+        Queue<Integer> roomList = new PriorityQueue<>();
         for (String[] time : book_time) {
-            if (roomList.isEmpty() || roomList.peek().peek() > convertTime(time[0])) {
-                offerRoomList(new Stack<Integer>(), time[1], roomList);
+            if (roomList.isEmpty() || roomList.peek() > convertTime(time[0])) {
+                roomList.offer(convertTime(time[1]) + 10);
             } else {
-                offerRoomList(roomList.poll(), time[1], roomList);
+                roomList.poll();
+                roomList.offer(convertTime(time[1]) + 10);
             }
         }
         
@@ -24,10 +25,5 @@ class Solution {
     int convertTime(String time) {
         String[] split = time.split(":");
         return Integer.parseInt(split[0]) * 60 + Integer.parseInt(split[1]);
-    }
-    
-    void offerRoomList(Stack<Integer> stack, String time, Queue<Stack<Integer>> queue) {
-                stack.push(convertTime(time) + 10);
-                queue.offer(stack);
     }
 }
