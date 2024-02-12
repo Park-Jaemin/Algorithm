@@ -11,12 +11,10 @@ class Solution {
         
         Queue<Integer> roomList = new PriorityQueue<>();
         for (String[] time : book_time) {
-            if (roomList.isEmpty() || roomList.peek() > convertTime(time[0])) {
-                roomList.offer(convertTime(time[1]) + 10);
-            } else {
+            if (!roomList.isEmpty() && roomList.peek() <= convertTime(time[0])) {
                 roomList.poll();
-                roomList.offer(convertTime(time[1]) + 10);
             }
+            roomList.offer(convertTime(time[1]) + 10);
         }
         
         return roomList.size();
