@@ -11,7 +11,7 @@ class Solution {
             if (word.equals(" ")) {
                 first = true;
                 sb.append(word);
-                continue;
+                continue; 
             }
             
             if (first) {
