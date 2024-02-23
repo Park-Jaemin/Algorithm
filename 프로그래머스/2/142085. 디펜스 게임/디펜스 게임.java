@@ -2,7 +2,7 @@ import java.util.*;
 
 class Solution {
     public int solution(int n, int k, int[] enemy) {
-        int answer = enemy.length;
+        int answer = enemy.length; 
         Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
 
         for (int i = 0; i < enemy.length; i++) {
