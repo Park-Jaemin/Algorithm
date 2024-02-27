@@ -33,7 +33,7 @@ class Solution {
                 sum2 += poll;
                 sum1 -= poll;
             }
-            answer++;
+            answer++; 
         }
         
         return answer;
